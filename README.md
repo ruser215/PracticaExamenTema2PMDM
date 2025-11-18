@@ -30,7 +30,7 @@ El fondo de la app lo puse, debido a que cuando vi la actividad, automaticamente
 
 ---
 
-[Video demostración](https://drive.google.com/file/d/1dCKfrIE8JauMwGHuikGVsolMonBBorVZ/view?usp=drive_link)
+[Video demostración](https://drive.google.com/file/d/1dCKfrIE8JauMwGHuikGVsolMonBBorVZ/view?usp=sharing)
 
 
 

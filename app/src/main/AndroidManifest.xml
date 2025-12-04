@@ -33,7 +33,7 @@
             android:name=".Llamada"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".pantallaprincipal"
             android:exported="false">
         </activity>
         <meta-data

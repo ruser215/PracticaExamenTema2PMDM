@@ -21,7 +21,7 @@ import com.google.android.gms.location.FusedLocationProviderClient // Import par
 import com.google.android.gms.location.LocationServices // Import para inicializar el cliente
 import java.util.Calendar
 
-class MainActivity : AppCompatActivity() {
+class pantallaprincipal : AppCompatActivity() {
     private lateinit var mainBinding : ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 

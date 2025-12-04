@@ -3,7 +3,6 @@ package com.example.a1actividadadobligatoria
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.telephony.PhoneNumberUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a1actividadadobligatoria.databinding.ActivityConfigBinding
@@ -85,7 +84,7 @@ class configActivity : AppCompatActivity() {
 
     //metodo para lanzar el activity principal pasandole los datos necesarios
     private fun startMainActivity(phone: String, name: String){
-        val intent = Intent(this@configActivity, MainActivity::class.java)
+        val intent = Intent(this@configActivity, pantallaprincipal::class.java)
 
         intent.apply{
             putExtra(getString(R.string.string_phone), phone) //pasamos informacion

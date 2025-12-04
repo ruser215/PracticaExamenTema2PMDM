@@ -67,7 +67,7 @@ class Llamada : AppCompatActivity() {
 
 
     private fun volver(){
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, pantallaprincipal::class.java)
             .apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             }

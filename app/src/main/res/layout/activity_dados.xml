@@ -4,14 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00BCD4"
     tools:context=".pantallaprincipal">
+
+    <ImageButton
+        android:id="@+id/btn_volver"
+        android:layout_width="66dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/atras"
+        android:backgroundTint="@color/azulpolicia"
+        android:contentDescription="boton para volver al MainActivity"
+        app:layout_constraintEnd_toStartOf="@+id/txt_resultado"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_resultado" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="84dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/vaso" />
@@ -20,8 +35,9 @@
         android:id="@+id/imagview_dado1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.731"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton"
         app:srcCompat="@drawable/dado1" />
@@ -30,9 +46,8 @@
         android:id="@+id/imagview_dado2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="144dp"
         app:layout_constraintEnd_toEndOf="@+id/imagview_dado1"
         app:layout_constraintTop_toBottomOf="@+id/imagview_dado1"
         app:srcCompat="@drawable/dado1" />
@@ -41,7 +56,8 @@
         android:id="@+id/imagview_dado3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/imagview_dado2"
         app:layout_constraintTop_toBottomOf="@+id/imagview_dado2"
         app:srcCompat="@drawable/dado1" />
@@ -55,9 +71,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagview_dado3"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.188" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

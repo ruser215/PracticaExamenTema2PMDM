@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a1actividadadobligatoria.clasespojo.Accion
 
 class AdaptadorAcciones {
+    /*
     class ItemAdapter(
         private val lista: List<Accion>,
         private val onClick: (Accion) -> Unit
@@ -32,4 +33,5 @@ class AdaptadorAcciones {
 
         override fun getItemCount(): Int = lista.size
     }
+    */
 }

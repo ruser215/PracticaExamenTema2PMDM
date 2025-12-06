@@ -5,78 +5,83 @@
     android:id="@+id/mainMainActvity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="false"
-    android:layout_centerHorizontal="false"
-    android:background="@color/grisclaro">
+    android:background="@color/grisclaro"
+    tools:context=".pantallaprincipal">
+
+    <!--
+        CORRECCIÓN PRINCIPAL: Cambiado de LinearLayout a RecyclerView.
+        Esto permite que tu código de ViewBinding y el adaptador funcionen correctamente.
+    -->
+    <!-- Añade esto si tienes un layout de item para previsualizar -->
 
     <TextView
         android:id="@+id/text_usarname"
-        android:layout_width="293dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="23dp"
-        android:text="Texto prueba"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="24dp"
         android:textAlignment="center"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Texto prueba" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="536dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mostrador_acciones"
+        android:layout_width="399dp"
+        android:layout_height="616dp"
         android:layout_marginTop="12dp"
-        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_usarname"></LinearLayout>
-
-    <ImageView
-        android:id="@+id/btm_localizacion"
-        android:layout_width="86dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_alarma"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.52"
-        app:srcCompat="@drawable/icono_localizacion" />
-
-    <ImageView
-        android:id="@+id/btm_URL"
-        android:layout_width="86dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="108dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_alarma"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.52"
-        app:srcCompat="@drawable/telefonos_ayuda" />
+        app:layout_constraintTop_toBottomOf="@+id/text_usarname"
+        tools:listitem="@layout/item_accion" />
 
     <ImageView
         android:id="@+id/btn_config"
-        android:layout_width="86dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="92dp"
+        android:layout_height="74dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintStart_toEndOf="@+id/btm_localizacion"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.52"
+        app:layout_constraintTop_toBottomOf="@+id/mostrador_acciones"
+        app:layout_constraintVertical_bias="0.272"
         app:srcCompat="@drawable/icono_conf" />
 
     <ImageView
-        android:id="@+id/btn_alarma"
+        android:id="@+id/btn_URL"
         android:layout_width="86dp"
         android:layout_height="73dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/btn_config"
+        app:layout_constraintTop_toBottomOf="@+id/mostrador_acciones"
+        app:layout_constraintVertical_bias="0.272"
+        app:srcCompat="@drawable/telefonos_ayuda" />
+
+    <ImageView
+        android:id="@+id/btn_loc"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_URL"
+        app:layout_constraintTop_toBottomOf="@+id/mostrador_acciones"
+        app:layout_constraintVertical_bias="0.272"
+        app:srcCompat="@drawable/icono_localizacion" />
+
+    <ImageView
+        android:id="@+id/btn_alar"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
+        android:layout_marginEnd="116dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_URL"
+        app:layout_constraintTop_toBottomOf="@+id/mostrador_acciones"
+        app:layout_constraintVertical_bias="0.272"
         app:srcCompat="@drawable/icono_alarma" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

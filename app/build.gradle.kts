@@ -51,6 +51,7 @@ dependencies {
     implementation("com.googlecode.libphonenumber:libphonenumber:8.13.38")
     implementation("com.google.android.gms:play-services-location:21.3.0")
     implementation(libs.transportation.driver)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -79,23 +79,8 @@ class pantallaprincipal : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //Boton de SOS
-        mainBinding.btnSOS.setOnClickListener {
-            if (permisosLlamar()){
-                val intent = Intent(this, Llamada::class.java)
-                    .apply {
-                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                        putExtra("numero", obtenerTelefono())
-                    }
-                startActivity(intent)
-            }else{
-                Toast.makeText(this, R.string.msg_not_valid_number, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
         //boton de lanzar URL
-        mainBinding.btnURL.setOnClickListener {
+        mainBinding.btmURL.setOnClickListener {
             BuscarURL("https://www.juntadeandalucia.es/temas/salud/servicios/telefonos.html")
         }
 
@@ -105,7 +90,7 @@ class pantallaprincipal : AppCompatActivity() {
         }
 
         //Boton de enviar SMS
-        mainBinding.btnUbicacion.setOnClickListener {
+        mainBinding.btmLocalizacion.setOnClickListener {
             obtenerUbicacion()
         }
 
@@ -166,7 +151,7 @@ class pantallaprincipal : AppCompatActivity() {
         val nameShare = getString(R.string.name_shered_name)
         val sharedFich = getSharedPreferences(nameSharedFich, MODE_PRIVATE)
         val nombre = sharedFich.getString(nameShare, "Usuario")
-        mainBinding.textView.text = nombre
+        mainBinding.textUsarname.text = nombre
     }
 
 

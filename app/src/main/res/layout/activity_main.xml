@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainMainActvity"
@@ -7,139 +7,76 @@
     android:layout_height="match_parent"
     android:layout_centerInParent="false"
     android:layout_centerHorizontal="false"
-    android:background="@color/grisclaro"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:background="@color/grisclaro">
+
+    <TextView
+        android:id="@+id/text_usarname"
+        android:layout_width="293dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="23dp"
+        android:text="Texto prueba"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/fondo"
-        android:backgroundTint="@color/black"
-        android:orientation="vertical" />
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="536dp"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_usarname"></LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/btm_localizacion"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_alarma"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.52"
+        app:srcCompat="@drawable/icono_localizacion" />
 
-        <LinearLayout
-            android:id="@+id/layoutarriba"
-            android:layout_width="match_parent"
-            android:layout_height="408dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
+    <ImageView
+        android:id="@+id/btm_URL"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="108dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_alarma"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.52"
+        app:srcCompat="@drawable/telefonos_ayuda" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="316dp"
-                android:layout_height="79dp"
-                android:background="@color/azulpolicia"
-                android:fontFamily="@font/archivo_black"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="nombreUser"
-                android:textColor="@color/white"
-                android:textSize="34sp" />
-        </LinearLayout>
+    <ImageView
+        android:id="@+id/btn_config"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toEndOf="@+id/btm_localizacion"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.52"
+        app:srcCompat="@drawable/icono_conf" />
 
-        <LinearLayout
-            android:id="@+id/layoutabajo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <ImageView
+        android:id="@+id/btn_alarma"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/icono_alarma" />
 
-            <LinearLayout
-                android:id="@+id/lugarbotonSOS"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:contentDescription="cambiar configuración"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnSOS"
-                    android:layout_width="268dp"
-                    android:layout_height="72dp"
-                    android:backgroundTint="@color/azulpolicia"
-                    android:padding="12dp"
-                    android:text="SOS"
-                    android:textColor="@color/white"
-                    android:textSize="24sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lugarbotonURL"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnURL"
-                    android:layout_width="268dp"
-                    android:layout_height="72dp"
-                    android:backgroundTint="@color/azulpolicia"
-                    android:text="Telefonos de ayuda"
-                    android:textColor="@color/white"
-                    android:textSize="24sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lugarbotontemporizador"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnAlarma"
-                    android:layout_width="268dp"
-                    android:layout_height="72dp"
-                    android:backgroundTint="@color/azulpolicia"
-                    android:text="Alarma"
-                    android:textColor="@color/white"
-                    android:textSize="24sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lugarbotonpropio"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnUbicacion"
-                    android:layout_width="268dp"
-                    android:layout_height="72dp"
-                    android:backgroundTint="@color/azulpolicia"
-                    android:text="Mandar ubicación"
-                    android:textColor="@color/white"
-                    android:textSize="24sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="bottom|right"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/btnConfig"
-                    android:layout_width="71dp"
-                    android:layout_height="69dp"
-                    android:background="@drawable/engranaje"
-                    android:contentDescription="boton para cambiar opciones de la app" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

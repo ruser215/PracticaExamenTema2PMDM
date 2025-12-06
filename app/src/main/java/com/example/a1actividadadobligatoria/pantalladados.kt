@@ -1,5 +1,6 @@
 package com.example.a1actividadadobligatoria
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -46,6 +47,11 @@ class pantalladados : AppCompatActivity() {
             game()  //comienza el juego
 
         }
+
+        bindingMain.btnVolver.setOnClickListener{
+            volver()
+        }
+
     }
 
     //Comienza el juego
@@ -136,6 +142,13 @@ Método que lanza los tres dados a partir de 3 aleatorios.
 
     }
 
+    private fun volver(){
+        val intent = Intent(this, pantallaprincipal::class.java)
+            .apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+        startActivity(intent)
+    }
 
     /*
     Muestra los resultados, que es la suma de la última tirada.

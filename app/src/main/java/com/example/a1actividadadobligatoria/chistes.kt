@@ -1,6 +1,7 @@
 package com.example.a1actividadadobligatoria
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -119,6 +120,11 @@ la diferencia de tiempos y comprobar si es menor de 500 msg.
             }
 */
         }  //fin listener
+
+        binding.btnVolver.setOnClickListener{
+            volver()
+        }
+
     }
 
     //Habla
@@ -141,4 +147,13 @@ la diferencia de tiempos y comprobar si es menor de 500 msg.
         }
         super.onDestroy()
     }
+
+    private fun volver(){
+        val intent = Intent(this, pantallaprincipal::class.java)
+            .apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+        startActivity(intent)
+    }
+
 }

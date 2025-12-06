@@ -3,48 +3,40 @@ package com.example.a1actividadadobligatoria
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location // Importa la clase Location correcta
+import android.location.Location
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.Settings
 import android.telephony.SmsManager
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.a1actividadadobligatoria.controller.controlerAccion
 import com.example.a1actividadadobligatoria.databinding.ActivityMainBinding
-import com.google.android.gms.location.FusedLocationProviderClient // Import para el cliente de ubicación
-import com.google.android.gms.location.LocationServices // Import para inicializar el cliente
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import java.util.Calendar
 
 class pantallaprincipal : AppCompatActivity() {
     private lateinit var mainBinding : ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var controller: controlerAccion
 
-
-    //La siguiente variable acepta como string los permisos a lanzar
     private lateinit var requestPermissionsLauncher : ActivityResultLauncher<Array<String>>
-    private var todoslospermiso = false;
-
+    private var todosLosPermisosConcedidos = false // CORRECCIÓN: Nombre de variable más claro
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.mainMainActvity)
-        enableEdgeToEdge()
-        /*
-        ViewCompat.setOnApplyWindowInsetsListener(mainBinding.mainMainActvity) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        */
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this) //inicializamos el cliente
+        setContentView(mainBinding.root)
+        // enableEdgeToEdge() // CORRECCIÓN: Se elimina esta línea que causa el error de compilación.
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        controller = controlerAccion(this)
 
         cargarNombre()
         init()
@@ -53,6 +45,7 @@ class pantallaprincipal : AppCompatActivity() {
     private fun init(){
         LanzadorPermisos()
         if(!mirarpermisos()){
+            // Lanza la solicitud solo si no tienes todos los permisos ya concedidos
             requestPermissionsLauncher.launch(
                 arrayOf(
                     android.Manifest.permission.CALL_PHONE,
@@ -61,41 +54,46 @@ class pantallaprincipal : AppCompatActivity() {
                 )
             )
         }
-        //Boton para la configuracion
+
         mainBinding.btnConfig.setOnClickListener {
             val nameSharedFich = getString(R.string.name_shared_fich)
             val nameSharedPhone = getString(R.string.name_shared_phone)
             val nameSharename = getString(R.string.name_shered_name)
             val sharedFich = getSharedPreferences(nameSharedFich, MODE_PRIVATE)
-            val edit = sharedFich.edit()
-            edit.remove(nameSharedPhone)
-            edit.remove(nameSharename)
-            edit.apply()
-            val intent = Intent(this, configActivity::class.java)
-                .apply {
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    putExtra("back", true)
-                }
+            sharedFich.edit().apply {
+                remove(nameSharedPhone)
+                remove(nameSharename)
+                apply()
+            }
+            val intent = Intent(this, configActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                putExtra("back", true)
+            }
             startActivity(intent)
         }
 
-        //boton de lanzar URL
-        mainBinding.btmURL.setOnClickListener {
+        mainBinding.btnURL.setOnClickListener {
             BuscarURL("https://www.juntadeandalucia.es/temas/salud/servicios/telefonos.html")
         }
 
-        //Boton de la alarma
-        mainBinding.btnAlarma.setOnClickListener {
+        mainBinding.btnAlar.setOnClickListener {
             PonerAlarma()
         }
 
-        //Boton de enviar SMS
-        mainBinding.btmLocalizacion.setOnClickListener {
+        mainBinding.btnLoc.setOnClickListener {
             obtenerUbicacion()
         }
 
+        mostradorActividades()
     }
 
+
+    private fun mostradorActividades(){
+        //Creamos el controller
+        mainBinding.mostradorAcciones.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        //asignamos el adapter
+        controller.setAdapter(mainBinding.mostradorAcciones)
+    }
 
 
 
@@ -122,30 +120,27 @@ class pantallaprincipal : AppCompatActivity() {
         }else{
             Toast.makeText(this, R.string.msg_not_valid_aplication_Alarm, Toast.LENGTH_SHORT).show()
         }
-
     }
 
-
-
-
-    //Esta funcion lanza los permisos que se necesitan
+    // CORRECCIÓN: Lógica de permisos mejorada
     private fun LanzadorPermisos() {
         requestPermissionsLauncher = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permisos ->
-            permisos.forEach { (permiso, isGranted) ->
-                if (isGranted) {
-                    todoslospermiso = true
-                    Toast.makeText(this, "$permiso concedido", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "$permiso denegado", Toast.LENGTH_SHORT).show()
-                    goToConfiguracionApp() // abre configuración manual de permisos
-                }
+            // Comprueba si TODOS los valores en el mapa de permisos son 'true'
+            val todosConcedidos = permisos.values.all { it }
+
+            if (todosConcedidos) {
+                todosLosPermisosConcedidos = true
+                Toast.makeText(this, "Todos los permisos fueron concedidos", Toast.LENGTH_SHORT).show()
+            } else {
+                todosLosPermisosConcedidos = false
+                Toast.makeText(this, "Algunos permisos fueron denegados. Algunas funciones no estarán disponibles.", Toast.LENGTH_LONG).show()
+                // goToConfiguracionApp() // ADVERTENCIA: Redirigir aquí crea una mala experiencia de usuario. Es mejor mostrar un diálogo.
             }
         }
     }
 
-    //Carga el nombre del usuario en los text
     private fun cargarNombre(){
         val nameSharedFich = getString(R.string.name_shared_fich)
         val nameShare = getString(R.string.name_shered_name)
@@ -154,104 +149,92 @@ class pantallaprincipal : AppCompatActivity() {
         mainBinding.textUsarname.text = nombre
     }
 
-
-    @SuppressLint("MissingPermission") // esto se pone porque ya verificamos los permisos con permisoUbicacion()
-    private fun obtenerUbicacion()  {
+    @SuppressLint("MissingPermission")
+    private fun obtenerUbicacion() {
         if (permisoUbicacion()) {
-            val location = fusedLocationClient.lastLocation
-            location.addOnSuccessListener { location: Location? ->
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                // CORRECCIÓN: Comprobar si la ubicación es nula
                 if (location != null){
                     val ubicacion = arrayOf(location.latitude, location.longitude)
                     mandarSMSUbi(ubicacion)
+                } else {
+                    Toast.makeText(this, "No se pudo obtener la ubicación. Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
                 }
+            }.addOnFailureListener {
+                Toast.makeText(this, "Error al obtener la ubicación: ${it.message}", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(this, "Permiso de ubicación denegado.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun obtenerTelefono() : String?{
+    private fun obtenerTelefono(): String? {
         val nameSharedFich = getString(R.string.name_shared_fich)
         val nameSharedPhone = getString(R.string.name_shared_phone)
         val sharedFich = getSharedPreferences(nameSharedFich, MODE_PRIVATE)
         return sharedFich.getString(nameSharedPhone, null)
     }
 
-    //Este metodo manda el SMS con la ubicacion que recibe en array de doubles
     private fun mandarSMSUbi(ubicacion: Array<Double>){
         val telefono = obtenerTelefono()
-        if (ubicacion != null) {
-            if (telefono != null) {
-                if(permisoSMS()){
-                    try {
-                        val LinkGoogleMaps = "https://www.google.com/maps/search/?api=1&query=${ubicacion[0]},${ubicacion[1]}"
-                        val MernsajjeSMS = "Mi ultima ubicacion conocida es: $LinkGoogleMaps"
-                        val MandarSMS: SmsManager = this.getSystemService(SmsManager::class.java)
-                        MandarSMS.sendTextMessage(telefono, null, MernsajjeSMS, null, null)
-                        Toast.makeText(this, R.string.msg_SMS_enviado, Toast.LENGTH_SHORT).show()
-                    }catch (e: Exception){
-                        Toast.makeText(this, R.string.msg_SMS_no_enviado, Toast.LENGTH_SHORT).show()
-                    }
-                }else{
-                    Toast.makeText(this, R.string.msg_not_valid_permission_SMS, Toast.LENGTH_SHORT).show()
-                    //he quitado retruns de aqui porque no tendrian que dar problemas
-                }
-            }else{
-                Toast.makeText(this, R.string.msg_empty_phone, Toast.LENGTH_SHORT).show()
-                //he quitado retruns de aqui porque no tendrian que dar problemas
-            }
-        }else{
-            Toast.makeText(this, R.string.msg_empty_ubicacion, Toast.LENGTH_SHORT).show()
-            //he quitado retruns de aqui porque no tendrian que dar problemas
+        // CORRECCIÓN: Comprobar primero el teléfono para no hacer trabajo innecesario
+        if (telefono == null) {
+            Toast.makeText(this, getString(R.string.msg_empty_phone), Toast.LENGTH_SHORT).show()
+            return // Salir de la función
+        }
+
+        if(!permisoSMS()) {
+            Toast.makeText(this, getString(R.string.msg_not_valid_permission_SMS), Toast.LENGTH_SHORT).show()
+            return // Salir de la función
+        }
+
+        try {
+            val linkGoogleMaps = "https://www.google.com/maps/search/?api=1&query=${ubicacion[0]},${ubicacion[1]}"
+            val mensajeSMS = "Mi ultima ubicacion conocida es: $linkGoogleMaps"
+
+            // CORRECCIÓN: Usar la forma moderna y segura de obtener SmsManager
+            val smsManager: SmsManager? = ContextCompat.getSystemService(this, SmsManager::class.java)
+            smsManager?.sendTextMessage(telefono, null, mensajeSMS, null, null)
+
+            Toast.makeText(this, getString(R.string.msg_SMS_enviado), Toast.LENGTH_SHORT).show()
+        } catch (e: Exception){
+            Toast.makeText(this, getString(R.string.msg_SMS_no_enviado) + ": " + e.message, Toast.LENGTH_SHORT).show()
         }
     }
 
     /*
-         Inicio del bloque de permisos
+     Inicio del bloque de permisos
      */
 
-    //metodo para unir todos los permisos en uno
-    private fun mirarpermisos():Boolean{
-        var respuesta = false
-        var permisosLlamada = permisosLlamar()
-        var permisosSMS = permisoSMS()
-        var permisosUbicacion = permisoUbicacion()
-        //si todos los permisos estan correctos debe entrar aqui
-        if(permisosLlamada == true && permisosSMS == true && permisosUbicacion == true ){
-            respuesta = true
-        }
-        return respuesta
+    // CORRECCIÓN: Función simplificada
+    private fun mirarpermisos(): Boolean {
+        return permisosLlamar() && permisoSMS() && permisoUbicacion()
     }
 
-    //metodo para los permisos de la llamada
-    private fun permisosLlamar() : Boolean{
-        var respuesta = false
-        //Para versión del sdk inferior a la API 23, no hace falta pedir permisos en t. ejecución.
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-            respuesta = true //no hace falta pedir permisos en t. real al usuario
-        else
-           respuesta = permisosLlamar2()
-        return respuesta
+    // CORRECCIÓN: Función simplificada
+    private fun permisosLlamar(): Boolean {
+        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED
     }
-    private fun permisosLlamar2() = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED //Hay que ver si se concedieron en ejecución o no.
 
-    //metodo para comprobar permisos de SMS
-    private fun permisoSMS() = ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
+    private fun permisoSMS(): Boolean {
+        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
+    }
 
-    private fun permisoUbicacion() = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    private fun permisoUbicacion(): Boolean {
+        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
 
     /*
-        Fin de bloque de permisos
+     Fin de bloque de permisos
      */
 
-    //Esta funcion abre la configuracion manual de permisos
     private fun goToConfiguracionApp(){
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", packageName, null)
         }
         startActivity(intent)
     }
-
-
-
 }
+
 
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.example.a1actividadadobligatoria.databinding.ActivityDadosBinding
 import java.util.concurrent.Executors
@@ -35,15 +36,26 @@ class pantalladados : AppCompatActivity() {
         bindingMain = ActivityDadosBinding.inflate(layoutInflater)
         setContentView(bindingMain.root)
         initEvent()
+        setupSpinner()
        // setContentView(R.layout.activity_main)
+    }
+    // Esta función configura el Spinner.
+    private fun setupSpinner() {
+        // Creamos una lista de números del 3 al 18.
+        val numeros = (3..18).toList()
+        // Creamos un "adaptador" para decirle al Spinner cómo mostrar esos números.
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, numeros)
+        bindingMain.spinerNumeros.adapter = adapter
     }
 
 
 
     private fun initEvent() {
         bindingMain.txtResultado.visibility = View.INVISIBLE
-        bindingMain.imageButton.setOnClickListener{
+        bindingMain.btnCubilete.setOnClickListener{
             bindingMain.txtResultado.visibility = View.VISIBLE
+            //desactivamos el boton para no tocarlo de nuevo
+            bindingMain.btnCubilete.isEnabled = false
             game()  //comienza el juego
 
         }
@@ -154,8 +166,21 @@ Método que lanza los tres dados a partir de 3 aleatorios.
     Muestra los resultados, que es la suma de la última tirada.
      */
     private fun viewResult() {
+        //da el resultado de la suma
         bindingMain.txtResultado.text = sum.toString()
-        println(sum)
+        //sacamos el resultado
+        val numeroSeleccionado = bindingMain.spinerNumeros.selectedItem as Int
+
+        //si se acierta se lanza el otro activity
+        if (sum == numeroSeleccionado) {
+            // Si son iguales, vamos a la pantalla de ganado.
+            val intent = Intent(this, ganado::class.java)
+            startActivity(intent)
+            finish() // Cierra esta actividad para que el usuario no pueda volver con el botón "atrás".
+        } else {
+            // Si no son iguales, reactivamos el botón para que pueda jugar otra vez.
+            bindingMain.btnCubilete.isEnabled = true
+        }
     }
 
 }

@@ -38,6 +38,8 @@ class configActivity : AppCompatActivity() {
 
         //abrir el fichero de preferencias compartidad
         this.sharedFich = getSharedPreferences(nameSharedFich, MODE_PRIVATE)
+
+        radios()
     }
 
     private fun start(){
@@ -94,6 +96,14 @@ class configActivity : AppCompatActivity() {
         startActivity(intent) // lanzamos el activity
     }
 
+    private fun radios(){
+        confBinding.radioSi.setOnClickListener {
+            confBinding.racioNo.isChecked = false
+        }
+        confBinding.racioNo.setOnClickListener {
+            confBinding.radioSi.isChecked = false
+        }
+    }
 
 
 

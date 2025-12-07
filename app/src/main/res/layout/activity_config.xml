@@ -1,163 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainConfig"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grisclaro"
-    android:orientation="vertical"
     tools:context=".configActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+    <EditText
+        android:id="@+id/editNameUser"
+        android:layout_width="355dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="ej: Firulais"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:backgroundTint="@color/black" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="44dp"
         android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical">
+        android:text="Teléfono SOS:"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNameUser" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical"></LinearLayout>
+    <EditText
+        android:id="@+id/editPhone"
+        android:layout_width="286dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:backgroundTint="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Configuración"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="203dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical">
+        android:text="Tu nombre:"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Tu nombre:"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editNameUser"
-                android:layout_width="285dp"
-                android:layout_height="64dp"
-                android:ems="10"
-                android:inputType="text"
-                android:text="ej: Firulais"
-                android:textSize="20sp"
-                tools:backgroundTint="@color/black" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Teléfono SOS:"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editPhone"
-                android:layout_width="285dp"
-                android:layout_height="64dp"
-                android:ems="10"
-                android:inputType="phone"
-                tools:backgroundTint="@color/black" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btnAceptar"
-            android:layout_width="211dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/azulpolicia"
-            android:text="ACEPTAR"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="203dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="36dp"
+        android:autoText="false"
         android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical"></LinearLayout>
-</LinearLayout>
+        android:text="sexo:"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPhone" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="212dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="64dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Configuración"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAceptar"
+        android:layout_width="211dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="356dp"
+        android:backgroundTint="@color/azulpolicia"
+        android:text="ACEPTAR"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNameUser" />
+
+    <RadioButton
+        android:id="@+id/radio_si"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="24dp"
+        android:text="Si"
+        app:layout_constraintStart_toStartOf="@+id/editPhone"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <RadioButton
+        android:id="@+id/racio_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="68dp"
+        android:text="No"
+        app:layout_constraintEnd_toEndOf="@+id/editPhone"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

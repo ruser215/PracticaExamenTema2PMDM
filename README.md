@@ -46,7 +46,7 @@ Esta es la primera pantalla que ve el usuario si no ha configurado la aplicació
 5.  En el primer inicio, se te pedirá que introduzcas tu nombre y número de teléfono.
 6.  Concede los permisos necesarios cuando se te solicite.
 
-[Video demostración](https://drive.google.com/file/d/12Q6WxQLUBIU8ynyr9z7yT2nm6UyreXtt/view?usp=sharing)
+[Video demostración](https://youtu.be/UKwTF6bBKiQ)
 
 ## Mejoras futuras
 

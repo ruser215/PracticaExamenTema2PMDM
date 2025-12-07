@@ -1,8 +1,8 @@
-# 1actividadadObligatoria
+# Actividad aplicacion completa tema 2
 
 ## Descripción
 
-Esta es una aplicación para Android desarrollada como un proyecto de estudiante. Sirve como una herramienta multifuncional que permite a los usuarios realizar diversas acciones como hacer llamadas, enviar SMS con la ubicación, establecer alarmas y más, directamente desde una pantalla central. La aplicación requiere la configuración del usuario en el primer inicio para almacenar un nombre y un número de teléfono válido.
+Sirve como una herramienta multifuncional que permite a los usuarios realizar diversas acciones como hacer llamadas, enviar SMS con la ubicación, establecer alarmas y más, directamente desde una pantalla central. La aplicación requiere la configuración del usuario en el primer inicio para almacenar un nombre y un número de teléfono válido.
 
 ## Características
 

@@ -9,6 +9,7 @@ import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import com.example.a1actividadadobligatoria.Repositorio.chistes
 import com.example.a1actividadadobligatoria.databinding.ActivityChistesBinding
 import java.util.Locale
 /*
@@ -49,6 +50,9 @@ class chistes : AppCompatActivity() {
     private lateinit var handler: Handler
     val MYTAG = "LOGCAT"  //para mirar logs
 
+    val chisteslista = chistes.listachistes
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChistesBinding.inflate(layoutInflater)
@@ -67,8 +71,6 @@ class chistes : AppCompatActivity() {
             Thread.sleep(3000)
             handler.post{
                 binding.progressBar.visibility = View.GONE  //ocultamos el progress
-                val description = getString(R.string.describe).toString()
-                speakMeDescription(description)  //que nos comente de qué va esto...
                 Log.i(MYTAG,"Se ejecuta correctamente el hilo")
                 binding.btnExample.visibility = View.VISIBLE
 
@@ -96,10 +98,12 @@ en milisegundos. Por cada click el touchLastTime se vuelve a actualizar, para ha
 la diferencia de tiempos y comprobar si es menor de 500 msg.
  */
     private fun initEvent() {
-        val chiste = resources.getString(R.string.chiste)
+
         binding.btnExample.setOnClickListener{
             //Sacamos el tiempo actual
             val currentTime = System.currentTimeMillis()
+            //sacamos el chiste aleatorio
+            val chiste = chisteAleatorio()
             //Comprobamos si el margen entre pulsación, da lugar a una doble pulsación.
             if (currentTime - touchLastTime < TOUCH_MAX_TIME){
               //  touchNumber=0
@@ -126,6 +130,14 @@ la diferencia de tiempos y comprobar si es menor de 500 msg.
         }
 
     }
+    private fun chisteAleatorio(): String {
+        val chisterespuesta = chisteslista.random()
+        return chisterespuesta.chiste.toString()
+    }
+
+
+
+
 
     //Habla
     private fun speakMeDescription(s: String) {
